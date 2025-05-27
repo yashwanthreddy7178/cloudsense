@@ -1,0 +1,1 @@
+{"features": ["cpu_util", "mem_util", "disk_io", "net_io", "active_processes", "hour_of_day", "day_of_week", "io_ratio", "cpu_mem_ratio", "load_score"]}

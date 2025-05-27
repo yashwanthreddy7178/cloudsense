@@ -1,0 +1,36 @@
+FROM apache/airflow:2.7.2
+
+USER root
+
+# Install system dependencies
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        build-essential \
+        python3-dev \
+        git \
+        tzdata \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && ln -fs /usr/share/zoneinfo/America/New_York /etc/localtime \
+    && dpkg-reconfigure -f noninteractive tzdata
+
+# Create directories and set permissions
+RUN mkdir -p /opt/airflow/mlruns \
+    && mkdir -p /opt/airflow/model \
+    && mkdir -p /opt/airflow/api \
+    && mkdir -p /opt/airflow/data \
+    && mkdir -p /opt/airflow/logs \
+    && mkdir -p /opt/airflow/mlflow_db \
+    && chown -R airflow:root /opt/airflow/mlruns \
+    && chown -R airflow:root /opt/airflow/model \
+    && chown -R airflow:root /opt/airflow/api \
+    && chown -R airflow:root /opt/airflow/data \
+    && chown -R airflow:root /opt/airflow/logs \
+    && chown -R airflow:root /opt/airflow/mlflow_db \
+    && chmod -R 755 /opt/airflow/logs
+
+USER airflow
+
+# Install Python packages
+COPY requirements.txt /requirements.txt
+RUN pip install --no-cache-dir -r /requirements.txt 

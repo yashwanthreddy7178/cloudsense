@@ -1,0 +1,9 @@
+pandas
+lightgbm
+optuna
+mlflow
+scikit-learn
+joblib
+pyarrow
+psycopg2-binary
+sqlalchemy

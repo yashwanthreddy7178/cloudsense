@@ -1,0 +1,2 @@
+cpu_util,mem_util,disk_io,net_io,active_processes,hour_of_day,day_of_week,io_ratio,cpu_mem_ratio,load_score
+0.25,0.75,212,314,167,14,3,0.67,1.09,102.9
